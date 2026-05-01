@@ -1,0 +1,69 @@
+_target_: omi.data.StructureDataModule
+
+config:
+  tokenizer: default 
+  repr_id_file: ${oc.env:PDB_DATASET_DIR}/pdb_repr.csv
+  train_config:
+    batch_size: 8
+    num_workers: 8
+    pin_memory: true
+    shuffle: true
+    drop_last: true
+    pdb_config:
+      entry_file: ${oc.env:PDB_DATASET_DIR}/pdb_pretrain/train_data/dataset.json
+      cluster_file: ${oc.env:PDB_DATASET_DIR}/pdb_pretrain/train_data/cluster.csv
+      structure_dir: ${oc.env:PDB_DATASET_DIR}/parsed_structures
+
+    sampling_config:
+      seed: 324245
+
+    feature_config:
+      use_structure: true
+      use_crop: true
+      crop_size: 256
+      radius: 10.0
+      # reorder_chains: true
+
+  dev_config:
+    batch_size: 8
+    num_workers: 8
+    pin_memory: true
+    shuffle: false
+    drop_last: true
+    pdb_config:
+      entry_file: ${oc.env:PDB_DATASET_DIR}/pdb_pretrain/dev_data/dataset.json
+      cluster_file: ${oc.env:PDB_DATASET_DIR}/pdb_pretrain/dev_data/cluster.csv
+      structure_dir: ${oc.env:PDB_DATASET_DIR}/parsed_structures
+
+    sampling_config:
+      deterministic: true
+
+    feature_config:
+      use_structure: true
+      use_crop: true
+      crop_size: 512
+      radius: 10.0
+      # reorder_chains: true
+
+  test_config:
+    batch_size: 1
+    num_workers: 8
+    pin_memory: true
+    shuffle: true
+    drop_last: true
+    pdb_config:
+      entry_file: ${oc.env:PDB_DATASET_DIR}/pdb_pretrain/test_data/dataset.json
+      cluster_file: ${oc.env:PDB_DATASET_DIR}/pdb_pretrain/test_data/cluster.csv
+      structure_dir: ${oc.env:PDB_DATASET_DIR}/parsed_structures
+
+    sampling_config:
+      deterministic: true
+
+    feature_config:
+      use_structure: true
+      use_crop: true
+      crop_size: 512
+      radius: 10.0
+      # reorder_chains: true
+
+  tmp_dir: ${oc.env:TMP_DIR}

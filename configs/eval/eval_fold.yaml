@@ -1,0 +1,12 @@
+use_usalign: true
+usalign_bin: ${oc.env:USALIGN_BIN}
+
+use_dockq: true
+dockq:
+  capri_peptide: false
+  small_molecule: false
+  no_align: false
+  n_cpu: 8
+  max_chunk: 512
+  allowed_mismatches: 100
+  mapping: null
