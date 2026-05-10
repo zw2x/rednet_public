@@ -1,0 +1,34 @@
+# pdb selective binding test set
+data:
+  _target_: rednet.data.PdbSelDataset
+  config:
+    batch_size: 1
+    num_workers: 8
+    pin_memory: true
+    shuffle: true
+    drop_last: true
+    pdb_config:
+      parsed_dir: ${oc.env:PDB_DATASET_DIR}/all_seqs_mmseqs_90_select_results/feats
+      dataset_file: ${oc.env:PDB_DATASET_DIR}/all_seqs_mmseqs_90_select_results/selected_cluster_df.csv
+      # src_dir: ${oc.env:PDB_DATASET_DIR}/mmcif_files
+      structure_dir: ${oc.env:PDB_DATASET_DIR}/parsed_structures
+
+    sampling_config:
+      deterministic: true
+
+    feature_config:
+      use_structure: true
+      use_crop: true
+      crop_size: -1
+      radius: 10.0
+
+  extra_args:
+    filter_hits: true
+    # evalue_threshold: 1
+    # min_num_chains: 1
+    # use_chain_cluster: True
+    # keep_interface_types={"hetero", "homo", "none"},
+    # min_seqlen: 20
+    # max_total_seqlen: 10000
+    # max_sample_size: 1000
+    # min_sample_size: 20

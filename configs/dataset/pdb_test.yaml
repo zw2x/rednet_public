@@ -1,0 +1,19 @@
+# low homology test sets
+batch_size: 1
+num_workers: 8
+pin_memory: true
+shuffle: false
+drop_last: true
+pdb_config:
+  entry_file: ${oc.env:PDB_DATASET_DIR}/pdb_pretrain/test_data/dataset.json
+  cluster_file: ${oc.env:PDB_DATASET_DIR}/pdb_pretrain/test_data/cluster.csv
+  structure_dir: ${oc.env:PDB_DATASET_DIR}/parsed_structures
+
+sampling_config:
+  deterministic: true
+
+feature_config:
+  use_structure: true
+  use_crop: false
+  crop_size: -1
+  radius: 10.0

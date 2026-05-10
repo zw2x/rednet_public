@@ -1,0 +1,44 @@
+[project]
+name = "rednet"
+version = "0.1.0"
+description = "Protein Redesign Network"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {file = "LICENSE"}
+
+authors = [
+  {name = "Ziwei Xie"}
+]
+
+classifiers = [
+  "Topic :: Scientific/Engineering :: Bio-Informatics",
+]
+
+dependencies = [
+  "numpy<2",
+  "torch",
+  "torch_geometric",
+  "transformers",
+  "ipython",
+  "einops",
+  "biopython",
+  "scikit-learn",
+  "pandas",
+  "pytest",
+  "black",
+  "omegaconf",
+  "wandb",
+  "lightning==2.4.0",
+  "rich",
+  "hydra-core",
+  "dotenv",
+  "joblib",
+  "lz4",
+  "torchtext",
+  "jupyter",
+  "dm-tree",
+]
+
+[tool.black]
+line-length = 120
+target-version = ['py311']

@@ -1,0 +1,28 @@
+*.pyc
+*.egg
+.eggs/
+.ipynb_checkpoints/
+*.swp
+*.egg-info/
+.cache/
+build/
+*.DS_Store
+.idea/
+.pytest_cache/
+legacy/
+database/
+# experiments configs
+experiments/
+expr_cfgs/
+# hydra
+outputs/
+logs/
+# test data
+test_outputs/
+tmp/
+lightning_logs/
+wandb/
+# vscode
+.vscode/
+pyrightconfig.json
+.env

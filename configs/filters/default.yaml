@@ -1,0 +1,54 @@
+
+pipeline: 
+  # Binary paths for various search tools
+  nhmmer_binary_path: null  # Will use result of shutil.which('nhmmer')
+  hmmalign_binary_path: null  # Will use result of shutil.which('hmmalign')
+  hmmsearch_binary_path: null  # Will use result of shutil.which('hmmsearch')
+  hmmbuild_binary_path: null  # Will use result of shutil.which('hmmbuild')
+  
+  # Database directory configuration
+  db_dir:
+    - _DEFAULT_DB_DIR  # a default path defined elsewhere
+  
+  # Database paths for various searches
+  small_bfd_database_path: "${DB_DIR}/bfd-first_non_consensus_sequences.fasta"
+  mgnify_database_path: "${DB_DIR}/mgy_clusters_2022_05.fa"
+  uniprot_cluster_annot_database_path: "${DB_DIR}/uniprot_all_2021_04.fa"
+  uniref90_database_path: "${DB_DIR}/uniref90_2022_05.fa"
+  ntrna_database_path: "${DB_DIR}/nt_rna_2023_02_23_clust_seq_id_90_cov_80_rep_seq.fasta"
+  rfam_database_path: "${DB_DIR}/rfam_14_9_clust_seq_id_90_cov_80_rep_seq.fasta"
+  rna_central_database_path: "${DB_DIR}/rnacentral_active_seq_id_90_cov_80_linclust.fasta"
+  pdb_database_path: "${DB_DIR}/mmcif_files"
+  seqres_database_path: "${DB_DIR}/pdb_seqres_2022_09_28.fasta"
+  
+  # CPU configuration for MSA tools
+  jackhmmer_n_cpu: 8  # Default to min(cpu_count, 8)
+  nhmmer_n_cpu: 8  # Default to min(cpu_count, 8)
+  
+  # Template search configuration
+  max_template_date: "2021-09-30"  # Date from the AlphaFold 3 paper
+
+# JAX inference performance tuning configuration
+inference:
+  model_dir: ${oc.env:AF3_MODEL_DIR}  # Directory containing the model weights
+  jax_compilation_cache_dir: null  # Path to directory for JAX compilation cache
+  gpu_device: 0  # GPU device to use for inference (defaults to 1st GPU)
+  buckets: [256, 512, 768, 1024, 1280, 1536, 2048, 2560, 3072, 3584, 4096, 4608, 5120]  # Token sizes for caching compilations
+  flash_attention_implementation: xla  # Options: [triton, cudnn, xla]
+                                          # triton: Fastest, requires Ampere+ GPUs
+                                          # cudnn: Also requires Ampere+ GPUs
+                                          # xla: Portable across GPU devices (no flash attention)
+  num_recycles: 10  # Number of recycles during inference (minimum: 1)
+  num_diffusion_samples: 5  # Number of diffusion samples to generate (minimum: 1)
+  num_seeds: null  # Number of seeds for inference
+                   # If set, only a single seed must be provided in input JSON
+                   # AlphaFold 3 will generate random seeds starting from the specified seed
+                   # If not set, AlphaFold 3 will use seeds as provided in input JSON
+  
+  # Conformer search configuration
+  conformer_max_iterations: null  # Default to RDKit default parameters value
+  
+  # Output controls
+  save_embeddings: false  # Whether to save final trunk single and pair embeddings
+  force_output_dir: false  # Whether to force output directory even if non-empty
+                           # Useful for running data pipeline and inference separately

@@ -1,0 +1,23 @@
+
+data:
+  _target_: rednet.data.SkempiDataset
+  config:
+    tokenizer: default 
+    assay_file: ${oc.env:DMS_DB}/skempi_data.csv
+    pdb_dir: ${oc.env:DMS_DB}/skempi_pdbs/
+
+    batch_size: 1
+    num_workers: 8
+    pin_memory: true
+    shuffle: true
+    drop_last: true
+    split_file: ["${oc.env:DMS_DB}/skempi_splits/test_split.json", "${oc.env:DMS_DB}/skempi_splits/val_split.json", "${oc.env:DMS_DB}/skempi_splits/train_split.json"]
+
+    sampling_config:
+      deterministic: true
+
+    feature_config:
+      use_structure: true
+
+  extra_args:
+    use_mut_chain_id: true

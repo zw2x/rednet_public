@@ -1,0 +1,56 @@
+_target_: rednet.RedNetModel
+
+config:
+  tokenizer: default
+  model_type: 'atom_gat'
+  noise_scale: 0.02
+
+  model:
+    node_features: 256
+    edge_features: 128
+    hidden_dim: 256
+    num_encoder_layers: 3
+    num_decoder_layers: 3
+    subset_size: 64
+    dropout: 0.2
+
+    featurizer:
+      version: '0.0.1'
+      use_out_mlp: true
+      add_enc_res_type: false
+      add_frame_shifts: true
+      add_sc_embedding: true
+      add_recycle_node: false
+      add_pred_tokens: false
+      # add_sc_shifts: false
+
+    decoder:
+      add_gat: true
+      use_token_attn: true
+
+    encoder:
+      add_gat: true
+
+    packer:
+      enabled: false
+      use_pde: false
+      add_edge_to_pair_cond: false
+
+    # edgewise logits prediction
+    pred_edgewise_logits: true
+    use_enc_edge_to_edgwise_logits: false
+
+    # recyle
+    recycle: false
+    min_recycle_training_epoch_num: 5
+
+  pretrain_loss:
+    reduction: "per_token"
+    # pred_pairwise_cond_tokens: false
+    pred_edgewise_loss: true
+    use_denoise_loss: false
+    use_pde_loss: false
+    term_weights:
+      dsn_mask: 1.0
+      pred_mask: 0.1
+      dsn_site_mask: 0.0

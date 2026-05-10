@@ -1,0 +1,21 @@
+data:
+  _target_: rednet.data.MegascaleDataset
+  config:
+    tokenizer: default 
+    assay_dir: ${oc.env:DMS_DB}/megascale_assays/
+    pdb_dir: ${oc.env:DMS_DB}/megascale_pdbs/
+
+    batch_size: 1
+    num_workers: 8
+    pin_memory: true
+    shuffle: true
+    drop_last: true
+    split_file: ["${oc.env:DMS_DB}/megascale_splits/test_split.json", "${oc.env:DMS_DB}/megascale_splits/test_denovo_split.json", "${oc.env:DMS_DB}/megascale_splits/test_trrosetta_split.json", "${oc.env:DMS_DB}/megascale_splits/val_split.json", "${oc.env:DMS_DB}/megascale_splits/train_split.json"]
+
+    sampling_config:
+      deterministic: true
+
+    feature_config:
+      use_structure: true
+
+  # extra_args:

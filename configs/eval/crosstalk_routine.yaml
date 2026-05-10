@@ -1,0 +1,9 @@
+
+in_files:
+  gt: ${oc.env:RESULT_DIR}/crosstalk_designs/gt_des_folding_test_crosstalk.csv
+  rednet_condec_10_08_010: ${oc.env:RESULT_DIR}/rednet_atomgat_k64_n002_c320_bbf_sc-epoch_070-crosstalk/condec_10_08_010_folding_test_crosstalk.csv
+
+# interface analysis
+ianal_files:
+  gt: ${oc.env:RESULT_DIR}/crosstalk_designs/gt_des_folding_test_ianal.csv
+  rednet_condec_10_08_010: ${oc.env:RESULT_DIR}/rednet_atomgat_k64_n002_c320_bbf_sc-epoch_070-crosstalk/condec_10_08_010_folding_test_ianal.csv
